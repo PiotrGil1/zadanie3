@@ -16,14 +16,14 @@ else{
         $msg = '';     
     }
     else{
-        if(empty($_POST['login']) || empty($_POST['haslo'])){
-            $msg='brak loginu lub hasła';
+        if(empty($_POST['username']) || empty($_POST['password'])){
+            $msg='brak nazwy użytkownika lub hasła';
         }
         else{
 
             $sql = "SELECT username, password FROM users WHERE username = ? AND password = ?";
             $stmt = $mysqli->prepare($sql);
-            $stmt->bind_param('ss', $_POST['login'], $_POST['haslo']);
+            $stmt->bind_param('ss', $_POST['username'], $_POST['password']);
             $stmt->execute();
             $wynik = $stmt->get_result();
             $znalezione = $wynik->num_rows;
@@ -34,7 +34,7 @@ else{
                    
             }
             else{
-                $msg = 'niepoprawne hasło lub login';
+                $msg = 'niepoprawna nazwa użytkownika lub hasło ';
             }
 
         }
@@ -53,8 +53,8 @@ else{
 </head>
 <body>
 <form action="" method="post">
-    <input type="text" name='login' placeholder="login">
-    <input type="text" name='haslo' placeholder="hasło">
+    <input type="text" name='username' placeholder="username">
+    <input type="text" name='password' placeholder="password">
     <input type="submit" name='log' value="zaloguj się">
     <p><?=$msg;?></p>
 </form>
