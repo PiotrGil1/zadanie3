@@ -41,11 +41,6 @@ else{
     }
 }
 
-$mysqli->close();
-
-
-
-
 ?>
 
 <!DOCTYPE html>
