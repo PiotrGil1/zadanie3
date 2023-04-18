@@ -21,25 +21,20 @@ else{
         }
         else{
 
-            $sql = "SELECT username, password FROM users WHERE username like ?";
+            $sql = "SELECT username, password FROM users WHERE username = ? AND password = ?";
             $stmt = $mysqli->prepare($sql);
-            $stmt->bind_param('s', $_POST['login']);
+            $stmt->bind_param('ss', $_POST['login'], $_POST['haslo']);
             $stmt->execute();
             $wynik = $stmt->get_result();
             $znalezione = $wynik->num_rows;
-            $dane = $wynik->fetch_array();
-
+        
             if($znalezione>0){
 
-                if($_POST['haslo']==$dane[1] && $_POST['login'] == $dane[0]){
-                    $msg='zalogowałeś się';
-                }
-                else{
-                    $msg = 'niepoprawne hasło';
-                }
+                 $msg='zalogowałeś się';
+                   
             }
             else{
-                $msg = 'niepoprawny login';
+                $msg = 'niepoprawne hasło lub login';
             }
 
         }
