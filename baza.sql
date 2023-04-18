@@ -2,3 +2,5 @@ create table users(id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, username VARCHAR(
 INSERT INTO users (username, password)
 VALUES
 ('admin', 'test');
+
+ALTER TABLE users ADD UNIQUE (username);
